@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>estas en Rectangulo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      color: black;
+      display: flex;
+    }
+
+    /* Menú lateral */
+.barra-amarilla {
+  display: flex;
+  align-items: center;
+  background-color: #FFF700;
+  padding: 10px;
+  gap: 10px; 
+}
+
+.botones-izquierda {
+  display: flex;
+  gap: 15px; 
+  flex: 1;
+}
+
+.opciones-diseño {
+  flex: 1;
+  background-color: #FF8100 ;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.opciones-btn {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.opciones-contenido {
+  display: none;
+  position: absolute;
+  background-color: #54F814;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+.opciones-contenido a {
+  color: black;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+}
+
+.opciones-contenido a:hover {
+  background-color: #f1f1f1;
+}
+
+.tutorial-btn {
+  background-color: rgb(227, 8, 8);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.contenedor-imagen {
+  position: fixed;
+  bottom: 10px;
+  left: 30px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagen-esquina {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.imagen-esquina:hover {
+  transform: scale(1.2);
+}
+.opciones-diseño:hover,
+.opciones-btn:hover,
+.tutorial-btn:hover {
+  animation: bounce 0.6s;
+}
+.texto-hover {
+  margin-top: 8px;
+  font-size: 28px;
+  color: black;
+  font-family: 'Comic Sans MS', cursive;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: center;
+}
+
+.contenedor-imagen:hover .texto-hover {
+  opacity: 1;
+}
+    .menu-lateral {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      background-color: #FFF700;
+      padding: 10px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+
+    .menu-lateral ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu-lateral label {
+      margin: 16px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .contenido {
+      margin-left: 240px;
+      width: calc(100% - 220px);
+    }
+    .banda-roja {
+      background-color: red;
+      height: 20px;
+      width: 100%;
+    }
+    .contenedor-carrito {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.icono-carrito {
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icono-carrito:hover {
+  transform: scale(1.1);
+}
+    .banda-azul {
+      background-color: #0056b3;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .banda-azul button {
+      background-color: #0056b3;
+      color: white;
+      border: 2px solid white;
+      padding: 12px 24px;
+      margin: 0 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .banda-azul button:hover {
+      background-color: #007bff;
+      transform: scale(1.05);
+}
+    .seccion-busqueda {
+      background-color: #FF8100;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .seccion-busqueda input[type="text"] {
+      padding: 12px;
+      width: 320px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    .seccion-busqueda button {
+      background-color: white;
+      color: black;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .titulo-tienda {
+      text-align: center;
+      color: #6BDB09;
+      font-size: 36px;
+      margin: 30px 0;
+      font-weight: bold;
+    }
+    .zona-productos {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .contenedor-imagen-zona {/*Esto estoy modificando*/
+  display: flex;
+  align-items: right;
+  margin: 3px 3px;
+}
+
+.imagen-zona-blanca {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagen-zona-blanca:hover {
+  transform: scale(1.1);
+}
+
+.fila-tienda {
+  text-align: left;
+  padding-left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 30px; 
+  margin: 30px 10px;
+}
+
+.titulo-tienda {
+  margin-left: 50px; 
+  color: #4DFF00;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0; 
+}
+
+.imagen-nivel-tienda {
+  width: 60px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagen-nivel-tienda:hover {
+  transform: scale(1.1);
+}
+    .producto {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: #fff;
+    }
+
+    .producto img {
+      width: 100%;
+      max-width: 160px;
+      border: 5px solid orange;
+      border-radius: 10px;
+    }
+
+    .producto .descripcion {
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    .producto .precio {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .producto button {
+      background-color: orange;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .producto .estrellas {
+      font-size: 20px;
+      color: gold;
+    }
+  
+    @media (max-width: 600px) {
+  .menu-superior {
+    flex-direction: column;
+  }
+}
+   @keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+    @media (max-width: 1000px) {
+      .zona-productos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .zona-productos {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+      }
+
+      .contenido {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!--  Menú lateral -->
+  <div class="menu-lateral">
+  <div class="barra-amarilla">
+  <div class="botones-izquierda">
+  <div class="opciones-diseño">
+  <div class="opciones-btn">Cubos</div>
+  <div class="opciones-contenido">
+    <a href="Cubo3x3.html">Cubo Rubick 3x3</a>
+    <a href="Pyraminx.html">Pyraminx</a>
+    <a href="Megaminx.html">Megaminx</a>
+    <a href="Rubicks Rectangulo.html">Prisma Rubicks</a>
+    <a href="Cubo Rubicks 7x7.html">Cubo Rubicks 7x7 y mas..</a>
+</div>
+</div> </div>
+</div>
+<div class="barra-amarilla">
+<div class="botones-izquierda">
+<div class="opciones-diseño">
+  <div class="opciones-btn">Accesorios</div>
+  <div class="opciones-contenido">
+    <a href="../Ext.Herramientas/Lubricantes.html">Lubricantes</a>
+    <a href="../Ext.Herramientas/Herramientas.html">Herramientas</a>
+    <a href="../Ext.Herramientas/Fundas.html">Fundas</a>
+    <a href="../Ext.Herramientas/Soportes.html">Soportes</a>
+  </div>
+</div>
+</div>
+</div>
+<div class="tutorial-btn" style="text-align: center; margin-top: 20px;">
+  <div class="opciones-btn">Tutorial</div>
+  <div class="opciones-contenido">
+    <a href="../Comoresolver3x3.html">Cómo resolver 3x3</a>
+    <a href="../metodofridrich.html">Método Fridrich</a>
+  </div>
+</div>
+  <div class="tutorial-btn" style="text-align: center; margin-top: 20px;">
+  <div class="opciones-btn">Contactos</div>
+  <div class="opciones-contenido">
+    <a href="https://www.facebook.com/profile.php?id=100077585408159&mibextid=ZbWKwL">Facebook</a>
+    <a href="#">Tel.960 136 5956</a>
+  </div>
+</div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="contenido">
+    <div class="banda-roja"></div>
+    <div class="banda-roja">
+     <div class="banda-roja">
+    <div class="contenedor-carrito">
+    <img src="imgCubo3x3/Carrito.jpeg" class="icono-carrito" onclick="abrirCarrito()">
+  </div>
+</div>
+</div>
+   <div class="banda-azul">
+     <div class="banda-azul">
+     <button onclick="location.href='../Principiantes.html'">Principiante</button>
+     <button onclick="location.href='../Intermedio.html'">Intermedio</button>
+     <button onclick="location.href='../Avanzado.html'">Avanzado</button>
+    </div>
+    </div>
+    <div class="seccion-busqueda">
+      <input type="text" placeholder="Buscar cubo...">
+      <button>Buscar</button>
+    </div>
+    <div class="fila-tienda">
+  <div class="titulo-tienda">Tienda</div>
+  <a href="../Index2.html">
+  <img src="imgCubo3x3/Flechita.jpeg" alt="Botón decorativo" class="imagen-nivel-tienda" onclick="accionBoton()">
+  </a>
+</div>
+     
+    <div class="zona-productos">
+      
+      <div class="producto">
+        <img src = "imgCubo3x3/Prismacilindro.png"/>
+        <div class="descripcion">Cubo Rubik en forma de prisma, clasico y de colores normales, de coleccion para coleccion</div>
+        <div class="precio">$309 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo Rubik en forma de prisma, clasico y de colores normales, de coleccion para coleccion', 309,'imgCubo3x3/Prismacilindro.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "imgCubo3x3/Prismapentagonal.png"/>
+        <div class="descripcion">Puzzle Toy de nivel avanzado, complicado pero lindo, de alta calidad</div>
+        <div class="precio">$660.15 MXN</div>
+        <button onclick="agregarAlCarrito('Puzzle Toy de nivel avanzado, complicado pero lindo, de alta calidad', 660.15,'imgCubo3x3/Prismapentagonal.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "imgCubo3x3/Prismaoctagonal.png"/>
+        <div class="descripcion">Prisma Octagonal, de nivel avanzado y de calidad media</div>
+        <div class="precio">$230 MXN</div>
+        <button onclick="agregarAlCarrito('Prisma Octagonal, de nivel avanzado y de calidad media', 230,'imgCubo3x3/Prismaoctagonal.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "imgCubo3x3/colorprisma.png"/>
+        <div class="descripcion">Prisma coleccionable de colores llamativos, de nivel principiante</div>
+        <div class="precio">$623.48 MXN</div>
+        <button onclick="agregarAlCarrito('Prisma coleccionable de colores llamativos, de nivel principiante', 623.48,'imgCubo3x3/colorprisma.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "imgCubo3x3/Prismatriangulo.png"/>
+        <div class="descripcion">Cubo con divisiones triangulares de nivel principiante</div>
+        <div class="precio">$109 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo con divisiones triangulares de nivel principiante', 109,'imgCubo3x3/Prismatriangulo.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+ <div class="producto">
+         <img src = "imgCubo3x3/Prismacolor.png"/>
+        <div class="descripcion">Cubo con divisiones triangulares de nivel Intermedio</div>
+        <div class="precio">$378 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo con divisiones triangulares de nivel Intermedio', 378,'imgCubo3x3/Prismacolor.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+<div class="contenedor-imagen">
+  <img src="imgCubo3x3/sanis.jpeg" class="imagen-esquina">
+  <div class="texto-hover">Sanis Rubicks</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const botones = document.querySelectorAll('.opciones-btn');
+
+    botones.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const contenido = btn.nextElementSibling;
+        const visible = contenido.style.display === 'block';
+        
+        document.querySelectorAll('.opciones-contenido').forEach(menu => {
+          menu.style.display = 'none';
+        });
+
+        contenido.style.display = visible ? 'none' : 'block';
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (![...botones].some(btn => btn.contains(e.target)) &&
+          ![...document.querySelectorAll('.opciones-contenido')].some(menu => menu.contains(e.target))) {
+        document.querySelectorAll('.opciones-contenido').forEach(menu => {
+          menu.style.display = 'none';
+        });
+      }
+    });
+  });
+</script>
+<script>
+function abrirCarrito() {
+  window.location.href = '../Carrito.html';
+}
+</script>
+<script>
+function agregarAlCarrito(nombre, precio, imagen) {
+  const rutaImagen = "Ext.cubos/" + imagen;
+
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const existente = carrito.find(item => item.nombre === nombre);
+
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push({ nombre, precio, imagen: rutaImagen, cantidad: 1 });
+  }
+
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  alert(`${nombre} agregado al carrito por $${precio} MXN`);
+}
+</script>
+<script>
+const inputBusqueda = document.querySelector('.seccion-busqueda input');
+
+inputBusqueda.addEventListener('input', () => {
+  const texto = inputBusqueda.value.toLowerCase();
+
+  document.querySelectorAll('.producto').forEach(producto => {
+    
+    const textoProducto = producto.textContent.toLowerCase();
+
+    producto.style.display = textoProducto.includes(texto) ? '' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>

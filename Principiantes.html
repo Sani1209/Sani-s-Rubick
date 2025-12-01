@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estas en principiantes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      color: black;
+      display: flex;
+    }
+
+.barra-amarilla {
+  display: flex;
+  align-items: center;
+  background-color: #FFF700;
+  padding: 10px;
+  gap: 10px; 
+}
+
+.botones-izquierda {
+  display: flex;
+  gap: 15px; 
+  flex: 1;
+}
+
+.opciones-diseño {
+  flex: 1;
+  background-color: #FF8100 ;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.opciones-btn {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.opciones-contenido {
+  display: none;
+  position: absolute;
+  background-color: #54F814;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+.opciones-contenido a {
+  color: black;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+}
+
+.opciones-contenido a:hover {
+  background-color: #f1f1f1;
+}
+
+.tutorial-btn {
+  background-color: rgb(227, 8, 8);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contenedor-imagen {
+  position: fixed;
+  bottom: 10px;
+  left: 30px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagen-esquina {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.imagen-esquina:hover {
+  transform: scale(1.2);
+}
+.opciones-diseño:hover,
+.opciones-btn:hover,
+.tutorial-btn:hover {
+  animation: bounce 0.6s;
+}
+.texto-hover {
+  margin-top: 8px;
+  font-size: 28px;
+  color: black;
+  font-family: 'Comic Sans MS', cursive;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: center;
+}
+
+.contenedor-imagen:hover .texto-hover {
+  opacity: 1;
+}
+    .menu-lateral {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      background-color: #FFF700;
+      padding: 10px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+
+    .menu-lateral ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .menu-lateral label {
+      margin: 16px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .contenido {
+      margin-left: 240px;
+      width: calc(100% - 220px);
+    }
+   
+    .banda-roja {
+  background-color: red;
+  height: 20px;
+  width: 100%;
+}
+
+.contenedor-carrito {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.icono-carrito {
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icono-carrito:hover {
+  transform: scale(1.1);
+}
+    .banda-azul {
+      background-color: #0056b3;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .banda-azul button {
+      background-color: #0056b3;
+      color: white;
+      border: 2px solid white;
+      padding: 12px 24px;
+      margin: 0 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .banda-azul button:hover {
+      background-color: #007bff;
+      transform: scale(1.05);
+}
+
+    .seccion-busqueda {
+      background-color: #FF8100;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .seccion-busqueda input[type="text"] {
+      padding: 12px;
+      width: 320px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    .seccion-busqueda button {
+      background-color: white;
+      color: black;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .titulo-tienda {
+      text-align: center;
+      color: #4DFF00;
+      font-size: 36px;
+      margin: 30px 0;
+      font-weight: bold;
+    }
+     .contenedor-imagen-zona {
+  display: flex;
+  align-items: right;
+  margin: 3px 3px;
+}
+.fila-tienda {
+  text-align: left;
+  padding-left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 30px; 
+  margin: 30px 10px;
+}
+
+.titulo-tienda {
+  margin-left: 50px; 
+  color: #4DFF00;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0; 
+}
+
+.imagen-nivel-tienda {
+  width: 60px; 
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagen-nivel-tienda:hover {
+  transform: scale(1.1);
+}
+.imagen-zona-blanca {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagen-zona-blanca:hover {
+  transform: scale(1.1);
+}
+
+.texto-hover-zona {
+  margin-top: 8px;
+  font-size: 12px;
+  color: black;
+  font-family: 'Comic Sans MS', cursive;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: right;
+}
+
+.contenedor-imagen-zona:hover .texto-hover-zona {
+  opacity: 1;
+}
+    .zona-productos {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .producto {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: #fff;
+    }
+
+    .producto img {
+      width: 100%;
+      max-width: 160px;
+      border: 5px solid orange;
+      border-radius: 10px;
+    }
+
+    .producto .descripcion {
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    .producto .precio {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .producto button {
+      background-color: orange;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .producto .estrellas {
+      font-size: 20px;
+      color: gold;
+    }
+  
+    @media (max-width: 600px) {
+  .menu-superior {
+    flex-direction: column;
+  }
+}
+   @keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+    @media (max-width: 1000px) {
+      .zona-productos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .zona-productos {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+      }
+
+      .contenido {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!--  Menú lateral -->
+  <div class="menu-lateral">
+  <div class="barra-amarilla">
+  <div class="botones-izquierda">
+  <div class="opciones-diseño">
+  <div class="opciones-btn">Cubos</div>
+  <div class="opciones-contenido">
+    <a href="Ext.cubos/Cubo3x3.html">Cubo Rubick 3x3</a>
+    <a href="Ext.cubos/Pyraminx.html">Pyraminx</a>
+    <a href="Ext.cubos/Megaminx.html">Megaminx</a>
+    <a href="Ext.cubos/Rubicks Rectangulo.html">Prisma Rubicks</a>
+    <a href="Ext.cubos/Cubo Rubicks 7x7.html">Cubo Rubicks 7x7 y mas..</a>
+</div>
+</div> </div>
+</div>
+<div class="barra-amarilla">
+<div class="botones-izquierda">
+<div class="opciones-diseño">
+  <div class="opciones-btn">Accesorios</div>
+  <div class="opciones-contenido">
+    <a href="Ext.Herramientas/Lubricantes.html">Lubricantes</a>
+    <a href="Ext.Herramientas/Herramientas.html">Herramientas</a>
+    <a href="Ext.Herramientas/Fundas.html">Fundas</a>
+    <a href="Ext.Herramientas/Soportes.html">Soportes</a>
+  </div>
+</div>
+</div>
+</div>
+<div class="tutorial-btn" style="text-align: center; margin-top: 20px;">
+  <div class="opciones-btn">Tutorial</div>
+  <div class="opciones-contenido">
+    <a href="Comoresolver3x3.html">Cómo resolver 3x3</a>
+    <a href="metodofridrich.html">Método Fridrich</a>
+  </div>
+</div>
+<div class="tutorial-btn" style="text-align: center; margin-top: 20px;">
+  <div class="opciones-btn">Contactos</div>
+  <div class="opciones-contenido">
+    <a href="https://www.facebook.com/profile.php?id=100077585408159&mibextid=ZbWKwL">Facebook</a>
+    <a href="#">Tel.960 136 5956</a>
+  </div>
+</div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="contenido">
+    <div class="banda-roja"></div>
+    <div class="banda-roja">
+     <div class="banda-roja">
+    <div class="contenedor-carrito">
+    <img src="img/Carrito.jpeg" class="icono-carrito" onclick="abrirCarrito()">
+  </div>
+</div>
+</div>
+    <div class="banda-azul">
+      <div class="banda-azul">
+      <button onclick="location.href='Principiantes.html'">Principiante</button>
+      <button onclick="location.href='Intermedio.html'">Intermedio</button>
+      <button onclick="location.href='Avanzado.html'">Avanzado</button>
+    </div>
+
+    </div>
+    <div class="seccion-busqueda">
+      <input type="text" placeholder="Buscar cubo...">
+      <button>Buscar</button>
+    </div>
+    <div class="fila-tienda">
+    <div class="titulo-tienda">Cubos para principiantes</div>
+    <a href="Index2.html">
+    <img src="Ext.cubos/imgCubo3x3/Flechita.jpeg" alt="Botón decorativo" class="imagen-nivel-tienda" onclick="accionBoton()">
+    </a>
+    </div>
+    <div class="zona-productos">
+      
+      <div class="producto">
+        <img src = "img/Rubik Cube.jpeg"/>
+        <div class="descripcion">Cubo Rubik 3x3 clásico</div>
+        <div class="precio">$199 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo Rubik 3x3 clásico',199,'img/Rubik Cube.jpeg')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+      <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/cubo3x3paraprincipiantes.png"/>
+        <div class="descripcion">Games Cubo de Rubik, el Rompecabezas de Coincidencia de Colores 3x3 Original, Cubo para la solución de Problemas clásico, para principantes</div>
+        <div class="precio">$130 MXN</div>
+        <button onclick="agregarAlCarrito('Games Cubo de Rubik, el Rompecabezas de Coincidencia de Colores 3x3 Original, Cubo para la solución de Problemas clásico, para principantes',130,'Ext.cubos/imgCubo3x3/cubo3x3paraprincipiantes.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+      <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/cubo2x2paraprincipiantes.png"/>
+        <div class="descripcion">Cubo Aprendiz de Rubik'S Rompecabezas para Principiantes en Forma de Cubo 3D de 2x2 Juego de Mesa para aliviar el estrés para Jugar en casa o de Viaje Regalo idóneo para Adultos y niños,para principiantes</div>
+        <div class="precio">$90.87 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo Aprendiz de RubikS Rompecabezas para Principiantes en Forma de Cubo 3D de 2x2 Juego de Mesa para aliviar el estrés para Jugar en casa o de Viaje Regalo idóneo para Adultos y niños,para principiantes', 90.87,'Ext.cubos/imgCubo3x3/cubo2x2paraprincipiantes.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/2x2basicprincipiantes.png"/>
+        <div class="descripcion">Mini de 2x2 de Rubik, Rompecabezas de Coincidencia de Colores clásico 2x2, Rompecabezas de Bolsillo Que desafía la Mente,para principiantes</div>
+        <div class="precio">$132 MXN</div>
+        <button onclick="agregarAlCarrito('>Mini de 2x2 de Rubik, Rompecabezas de Coincidencia de Colores clásico 2x2, Rompecabezas de Bolsillo Que desafía la Mente,para principiantes', 132,'Ext.cubos/imgCubo3x3/2x2basicprincipiantes.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/kitprincipiantes.png"/>
+        <div class="descripcion">Kit 5 Cubos Velocidad,mágico Profesional Apto Principiantes</div>
+        <div class="precio">$518 MXN</div>
+        <button onclick="agregarAlCarrito('Kit 5 Cubos Velocidad,mágico Profesional Apto Principiantes', 518,'Ext.cubos/imgCubo3x3/kitprincipiantes.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/3x3conllavero.png"/>
+        <div class="descripcion">Pack de Cubo de Rubik clásico, Cubo 3x3 clásico con Llavero, Rompecabezas de Coincidencia de Colores,para principantes</div>
+        <div class="precio">$221 MXN</div>
+        <button onclick="agregarAlCarrito('Pack de Cubo de Rubik clásico, Cubo 3x3 clásico con Llavero, Rompecabezas de Coincidencia de Colores,para principantes', 221,'Ext.cubos/imgCubo3x3/3x3conllavero.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.Herramientas/imgHerramientas/soportesdif.png"/>
+        <div class="descripcion">Soporte de cubo de Color 2x2 3x3 4x4, 10 Uds., velocidad mágica de alta calidad, soporte de Base de cubo de plástico, juguetes educativos de aprendizaje</div>
+        <div class="precio">$49.90 MXN</div>
+        <button onclick="agregarAlCarrito('Soporte de cubo de Color 2x2 3x3 4x4, 10 Uds., velocidad mágica de alta calidad, soporte de Base de cubo de plástico, juguetes educativos de aprendizaje', 49.90,'Ext.Herramientas/imgHerramientas/soportesdif.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+
+ <div class="producto">
+         <img src = "img/piramiderubicks.jpg"/>
+        <div class="descripcion">Cubo rubicks Pyraminx, de nivel principiante</div>
+        <div class="precio">$219 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo rubicks Pyraminx, de nivel principiante', 219,'img/piramiderubicks.jpg')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/colorprisma.png"/>
+        <div class="descripcion">Prisma coleccionable de colores llamativos, de nivel principiante</div>
+        <div class="precio">$567.82 MXN</div>
+        <button onclick="agregarAlCarrito('Prisma coleccionable de colores llamativos, de nivel principiante', 567.82,'Ext.cubos/imgCubo3x3/colorprisma.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/3x1cubo.png"/>
+        <div class="descripcion">Cubo de Rubik para Principiantes Edge de Rubik'S de 3x3x1, Rompecabezas de una Capa</div>
+        <div class="precio">$129 MXN</div>
+        <button onclick="agregarAlCarrito('Cubo de Rubik para Principiantes Edge de RubikS de 3x3x1, Rompecabezas de una Capa', 129,'Ext.cubos/imgCubo3x3/3x1cubo.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/cubo3x3transpartente.png"/>
+        <div class="descripcion">Rubik's de Cristal, Nueva versión Transparente del clásico Cubo de Rubik de 3x3, resolución de Problemas y combinación de Colores, un desafío para la Mente para niños y Adultos a Partir de 8 años</div>
+        <div class="precio">$188 MXN</div>
+        <button onclick="agregarAlCarrito('Rubiks de Cristal, Nueva versión Transparente del clásico Cubo de Rubik de 3x3, resolución de Problemas y combinación de Colores, un desafío para la Mente para niños y Adultos a Partir de 8 años', 188,'Ext.cubos/imgCubo3x3/cubo3x3transpartente.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/cubovintage.jpeg"/>
+        <div class="descripcion">Vintage Original New Sealed Rubik’s Cube Ideal No. 2164-2 Puzzle Toy</div>
+        <div class="precio">$1,904.94 MXN</div>
+        <button onclick="agregarAlCarrito('Vintage Original New Sealed Rubik’s Cube Ideal No. 2164-2 Puzzle Toyo Rubik 4Pyraminx 5x5 profesional de gran dificultad4 Pro', 1904.941,'Ext.cubos/imgCubo3x3/cubovintage.jpeg')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/2x2sinbordes.png"/>
+        <div class="descripcion">GAN 251 M Air, 2x2 Magnetic Speed Cube Stickerless 251 Mini Cube 42 Magnets Puzzle Toy for Beginner(Frosted Surface Primary Internal)</div>
+        <div class="precio">$609 MXN</div>
+        <button onclick="agregarAlCarrito('GAN 251 M Air, 2x2 Magnetic Speed Cube Stickerless 251 Mini Cube 42 Magnets Puzzle Toy for Beginner(Frosted Surface Primary Internal)', 609,'Ext.cubos/imgCubo3x3/2x2sinbordes.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.Herramientas/imgHerramientas/lubricantenormal.png"/>
+        <div class="descripcion">Lubricante de aceite de silicona para principiantes Speed Cube para cubos de forma extraña de 3x3/4x4/5x5 giro suave el mejor lubricante para Speed Cubing</div>
+        <div class="precio">$18.57 MXN</div>
+        <button onclick="agregarAlCarrito('Lubricante de aceite de silicona para principiantes Speed Cube para cubos de forma extraña de 3x3/4x4/5x5 giro suave el mejor lubricante para Speed Cubing', 18.57,'Ext.Herramientas/imgHerramientas/lubricantenormal.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐</div>
+      </div>
+
+   <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/pryramix2x2.png"/>
+        <div class="descripcion">Pyraminx 2x2, para principiantes en pryramix, jueguete ideal para el estres y el razonamiento</div>
+        <div class="precio">$145 MXN</div>
+        <button onclick="agregarAlCarrito('Pyraminx 2x2, para principiantes en pryramix, jueguete ideal para el estres y el razonamiento', 145,'Ext.cubos/imgCubo3x3/pryramix2x2.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+   <div class="producto">
+        <img src = "Ext.cubos/imgCubo3x3/pyramixFlourecente.png"/>
+        <div class="descripcion">Pyraminx basico color Fluorescente para principantes</div>
+        <div class="precio">$210 MXN</div>
+        <button onclick="agregarAlCarrito('Pyraminx basico color Fluorescente para principantes', 210,'Ext.cubos/imgCubo3x3/pyramixFlourecente.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+         <img src = "Ext.Herramientas/imgHerramientas/maletin.png"/>
+        <div class="descripcion">Bag, 6 Pack Magic Cube Set of 3x3x3 2x2x2 Pyramid Skew Mirror Cube and Fenghuolun Cube Smooth Stickerless Puzzle Cube Game Toy Gift for Kids Teens Adults</div>
+        <div class="precio">$599 MXN</div>
+        <button onclick="agregarAlCarrito('Bag, 6 Pack Magic Cube Set of 3x3x3 2x2x2 Pyramid Skew Mirror Cube and Fenghuolun Cube Smooth Stickerless Puzzle Cube Game Toy Gift for Kids Teens Adults', 599,'Ext.Herramientas/imgHerramientas/maletin.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐⭐</div>
+      </div>
+  <div class="producto">
+        <img src = "Ext.Herramientas/imgHerramientas/Heeramientasgan.png"/>
+        <div class="descripcion">Gan 3x3x3 Cubo mágico kit de herramientas GAN soporte de exhibición pegatinas tapete de lubricante Cubo 3x3 tapa central Cubo accesorios Cubo mágico</div>
+        <div class="precio">$105.90 MXN</div>
+        <button onclick="agregarAlCarrito('Gan 3x3x3 Cubo mágico kit de herramientas GAN soporte de exhibición pegatinas tapete de lubricante Cubo 3x3 tapa central Cubo accesorios Cubo mágico', 105.90,'Ext.Herramientas/imgHerramientas/Heeramientasgan.png')">Agregar al carrito</button>
+        <div class="estrellas">⭐⭐⭐⭐⭐</div>
+      </div>
+
+    </div>
+  </div>
+<div class="contenedor-imagen">
+  <img src="img/sanis.jpeg" class="imagen-esquina">
+  <div class="texto-hover">Sanis Rubicks</div>
+</div>
+<script>
+const inputBusqueda = document.querySelector('.seccion-busqueda input');
+
+inputBusqueda.addEventListener('input', () => {
+  const texto = inputBusqueda.value.toLowerCase();
+
+  document.querySelectorAll('.producto').forEach(producto => {
+    
+    const textoProducto = producto.textContent.toLowerCase();
+
+    producto.style.display = textoProducto.includes(texto) ? '' : 'none';
+  });
+});
+</script>
+
+<script>
+  function agregarAlCarrito(nombre, precio, imagen) {
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const existente = carrito.find(item => item.nombre === nombre);
+
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push({ nombre, precio, imagen, cantidad: 1 });
+  }
+
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  alert(`${nombre} agregado al carrito por $${precio} MXN`);
+}
+
+function abrirCarrito() {
+  window.location.href = 'carrito.html';
+}
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const botones = document.querySelectorAll('.opciones-btn');
+
+    botones.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const contenido = btn.nextElementSibling;
+        const visible = contenido.style.display === 'block';
+        
+        document.querySelectorAll('.opciones-contenido').forEach(menu => {
+          menu.style.display = 'none';
+        });
+
+        contenido.style.display = visible ? 'none' : 'block';
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (![...botones].some(btn => btn.contains(e.target)) &&
+          ![...document.querySelectorAll('.opciones-contenido')].some(menu => menu.contains(e.target))) {
+        document.querySelectorAll('.opciones-contenido').forEach(menu => {
+          menu.style.display = 'none';
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>

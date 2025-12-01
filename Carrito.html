@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito - Sanis Rubicks</title>
+  <style>
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      color: black;
+      display: flex;
+    }
+    .menu-lateral {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      background-color: #FFF700;
+      padding: 10px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+    .menu-lateral ul {
+      list-style: none;
+      padding: 0;
+    }
+    .barra-amarilla {
+      display: flex;
+      align-items: center;
+      background-color: #FFF700;
+      padding: 10px;
+      gap: 10px; 
+    }
+    .botones-izquierda {
+      display: flex;
+      gap: 15px; 
+      flex: 1;
+    }
+    .contenedor-imagen {
+  position: fixed;
+  bottom: 10px;
+  left: 30px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+     .imagen-esquina {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+     .imagen-esquina:hover {
+  transform: scale(1.2);
+}
+     .texto-hover {
+  margin-top: 8px;
+  font-size: 28px;
+  color: black;
+  font-family: 'Comic Sans MS', cursive;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: center;
+}
+    .contenedor-imagen:hover .texto-hover {
+  opacity: 1;
+}
+
+    .opciones-diseño {
+      flex: 1;
+      background-color: #FF8100;
+      color: white;
+      text-align: center;
+      border: 2px solid white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .opciones-btn {
+      background-color: white;
+      color: black;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .opciones-contenido {
+      display: none;
+      position: absolute;
+      background-color: #54F814;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    }
+    .opciones-contenido a {
+      color: black;
+      padding: 10px;
+      display: block;
+      text-decoration: none;
+    }
+    .opciones-contenido a:hover {
+      background-color: #f1f1f1;
+    }
+    .tutorial-btn {
+      background-color: rgb(227, 8, 8);
+      color: white;
+      border: 2px solid white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .banda-roja {
+      background-color: red;
+      height: 20px;
+      width: 100%;
+    }
+    .banda-azul {
+      background-color: #0056b3;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .banda-azul button {
+      background-color: #0056b3;
+      color: white;
+      border: 2px solid white;
+      padding: 12px 24px;
+      margin: 0 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+      .banda-naranja {
+      background-color: #FF8100;
+      padding: 25px;
+      text-align: center;
+    }
+  
+.banda-roja,
+.banda-azul,
+.banda-naranja {
+  position: relative;
+  left: 0; 
+  width: 100%; 
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+}
+
+.banda-roja {
+  background-color: red;
+  height: 40px;
+  width: 100%;
+  margin: 0;
+}
+
+.banda-azul {
+  background-color: #0056b3;
+  text-align: center;
+  padding: 10px 0; 
+  margin: 0;
+}
+
+.banda-azul button {
+  background-color: #0056b3;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 24px;
+  margin: 0 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.banda-azul button:hover {
+  background-color: #007bff;
+  transform: scale(1.05);
+}
+
+.banda-naranja {
+  background-color: #FF8100;
+  height: 80px; 
+  margin: 0;
+}
+    .contenido {
+      margin-left: 240px;
+      width: calc(100% - 220px);
+    }
+    contenedor-imagen-zona {
+  display: flex;
+  align-items: right;
+  margin: 3px 3px;
+}
+
+.imagen-zona-blanca {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagen-zona-blanca:hover {
+  transform: scale(1.1);
+}
+
+.texto-hover-zona {
+  margin-top: 8px;
+  font-size: 12px;
+  color: black;
+  font-family: 'Comic Sans MS', cursive;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: right;
+}
+
+.contenedor-imagen-zona:hover .texto-hover-zona {
+  opacity: 1;
+}
+.fila-tienda {
+  text-align: left;
+  padding-left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 30px; 
+  margin: 30px 10px;
+}
+
+.titulo-tienda {
+  margin-left: 50px; 
+  color: #4DFF00;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0; 
+}
+/* Fondo oscuro */
+.popup-pago {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Caja del popup */
+.pago-contenido {
+  background: white;
+  padding: 25px;
+  width: 330px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pago-contenido input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid gray;
+  font-size: 16px;
+}
+
+.pago-contenido button {
+  width: 80%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  background: orange;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pago-contenido .cerrar {
+  background: red;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.imagen-nivel-tienda {
+  width: 60px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagen-nivel-tienda:hover {
+  transform: scale(1.1);
+}
+    @keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+   .opciones-diseño:hover,
+   .opciones-btn:hover,
+   .tutorial-btn:hover {
+      animation: bounce 0.6s;
+}
+
+
+    .producto-carrito {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: #fff;
+    }
+    .info {
+      flex: 2;
+    }
+    .controles {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-cantidad {
+      background-color: orange;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-eliminar {
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .total-general {
+      font-size: 22px;
+      text-align: right;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .vaciar-btn {
+      background-color: #FF8100;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      float: right;
+    }
+  .producto-carrito {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+}
+  .imagen-carrito {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+   .btn-pagar{
+     background-color: #FF8100;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      float: right;
+   }
+   .contenedor-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.Pagar-btn, .vaciar-btn {
+  float: none; 
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <div class="menu-lateral">
+    <div class="barra-amarilla">
+      <div class="botones-izquierda">
+        <div class="opciones-diseño">
+          <div class="opciones-btn">Cubos</div>
+          <div class="opciones-contenido">
+            <a href="Ext.cubos/Cubo3x3.html">Cubo Rubick 3x3</a>
+            <a href="Ext.cubos/Pyraminx.html">Pyraminx</a>
+            <a href="Ext.cubos/Megaminx.html">Megaminx</a>
+            <a href="Ext.cubos/Rubicks Rectangulo.html">Prisma Rubicks</a>
+            <a href="Ext.cubos/Cubo Rubicks 7x7.html">Cubo Rubicks 7x7 y más..</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="barra-amarilla">
+      <div class="botones-izquierda">
+        <div class="opciones-diseño">
+          <div class="opciones-btn">Accesorios</div>
+          <div class="opciones-contenido">
+            <a href="Ext.Herramientas/Lubricantes.html">Lubricantes</a>
+            <a href="Ext.Herramientas/Herramientas.html">Herramientas</a>
+            <a href="Ext.Herramientas/Fundas.html">Fundas</a>
+            <a href="Ext.Herramientas/Soportes.html">Soportes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tutorial-btn" style="text-align: center; margin-top: 20px;">
+      <div class="opciones-btn">Tutorial</div>
+      <div class="opciones-contenido">
+        <a href="Comoresolver3x3.html">Cómo resolver 3x3</a>
+        <a href="metodofridrich.html">Método Fridrich</a>
+      </div>
+    </div>
+
+    <div class="tutorial-btn" style="text-align: center; margin-top: 20px;">
+      <div class="opciones-btn">Contactos</div>
+      <div class="opciones-contenido">
+        <a href="https://www.facebook.com/profile.php?id=100077585408159&mibextid=ZbWKwL">Facebook</a>
+        <a href="#">Tel. 960 136 5956</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido del carrito -->
+  <div class="contenido">
+    <div class="banda-roja"></div>
+   <div class="banda-azul">
+     <div class="banda-azul">
+     <button onclick="location.href='Principiantes.html'">Principiante</button>
+     <button onclick="location.href='Intermedio.html'">Intermedio</button>
+     <button onclick="location.href='Avanzado.html'">Avanzado</button>
+    </div>
+    </div>
+   <div class="banda-naranja"></div>
+    <div class="fila-tienda">
+  <div class="titulo-tienda">Carrito</div>
+  <a href="Index2.html">
+  <img src="Ext.cubos/imgCubo3x3/Flechita.jpeg" alt="Botón decorativo" class="imagen-nivel-tienda" onclick="accionBoton()">
+  </a>
+  </div>
+    <div id="lista-carrito"></div>
+    <div class="total-general" id="total">Total: $0 MXN</div>
+    <div class="contenedor-botones">
+    <button class="vaciar-btn" id="vaciar">Vaciar carrito</button>
+    <button class="btn-pagar" id="Pagar" onclick="abrirPago()">Pagar</button>
+    </div>
+    
+  </div>
+  <div class="contenedor-imagen">
+  <img src="img/sanis.jpeg" class="imagen-esquina">
+  <div class="texto-hover">Sanis Rubicks</div>
+</div>
+
+  <script>
+    function mostrarCarrito() {
+      const contenedor = document.getElementById('lista-carrito');
+      const totalTexto = document.getElementById('total');
+      contenedor.innerHTML = '';
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      let total = 0;
+
+      carrito.forEach((item, index) => {
+        const caja = document.createElement('div');
+        caja.classList.add('producto-carrito');
+        caja.innerHTML = `
+  <img src="${item.imagen}" alt="${item.nombre}" class="imagen-carrito">
+  <div class="info">
+    <strong>${item.nombre}</strong><br>
+    Precio: $${item.precio} MXN<br>
+    Total: $${(item.precio * item.cantidad).toFixed(2)} MXN
+  </div>
+  <div class="controles">
+    <button class="btn-cantidad" onclick="cambiarCantidad(${index}, -1)">-</button>
+    <span>${item.cantidad}</span>
+    <button class="btn-cantidad" onclick="cambiarCantidad(${index}, 1)">+</button>
+    <button class="btn-eliminar" onclick="eliminarProducto(${index})">🗑️</button>
+  </div>`;
+
+        contenedor.appendChild(caja);
+        total += item.precio * item.cantidad;
+      });
+
+      totalTexto.textContent = `Total: $${total.toFixed(2)} MXN`;
+    }
+
+    function cambiarCantidad(i, cambio) {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito[i].cantidad = Math.max(1, carrito[i].cantidad + cambio);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      mostrarCarrito();
+    }
+
+    function eliminarProducto(i) {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(i, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      mostrarCarrito();
+    }
+
+    document.getElementById('vaciar').addEventListener('click', () => {
+      localStorage.removeItem('carrito');
+      mostrarCarrito();
+    });
+
+    mostrarCarrito();
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+  const botones = document.querySelectorAll('.opciones-btn');
+  botones.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const contenido = btn.nextElementSibling;
+      const visible = contenido.style.display === 'block';
+      document.querySelectorAll('.opciones-contenido').forEach(menu => {
+        menu.style.display = 'none';
+      });
+      contenido.style.display = visible ? 'none' : 'block';
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (![...botones].some(btn => btn.contains(e.target)) &&
+        ![...document.querySelectorAll('.opciones-contenido')].some(menu => menu.contains(e.target))) {
+      document.querySelectorAll('.opciones-contenido').forEach(menu => {
+        menu.style.display = 'none';
+      });
+    }
+  });
+});
+  </script>
+<script>
+function abrirPago() {
+  document.getElementById("pagoPopup").style.display = "flex";
+}
+function cerrarPago() {
+  document.getElementById("pagoPopup").style.display = "none";
+}
+
+function confirmarPago() {
+  const nombre = document.getElementById("nombrePago").value;
+  const direccion = document.getElementById("direccionPago").value;
+  const telefono = document.getElementById("telefonoPago").value;
+  const correo = document.getElementById("correoPago").value;
+
+  if (!nombre || !direccion || !telefono || !correo) {
+    alert("Por favor llena todos los campos.");
+    return;
+  }
+
+  alert(
+    "⚠ IMPORTANTE ⚠\n\n" +
+    "Nunca compartas tus datos en paginas que no sean oficiales.\n" +
+    "Sani's Rubik diseño este modelo como demostracion."
+  );
+  cerrarPago();
+}
+</script>
+
+<div id="pagoPopup" class="popup-pago">
+  <div class="pago-contenido">
+    <h2>Datos para completar el pago</h2>
+
+    <input type="text" id="nombrePago" placeholder="Nombre completo">
+    <input type="text" id="direccionPago" placeholder="Dirección de entrega">
+    <input type="text" id="telefonoPago" placeholder="Teléfono">
+    <input type="email" id="correoPago" placeholder="Correo electrónico">
+
+    <button onclick="confirmarPago()">Confirmar pago</button>
+    <button class="cerrar" onclick="cerrarPago()">Cancelar</button>
+  </div>
+</div>
+</body>
+</html>
