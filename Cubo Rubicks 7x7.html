@@ -503,22 +503,25 @@
   });
 </script>
 <script>
-  function agregarAlCarrito(nombre, precio, imagen) {
+function abrirCarrito() {
+  window.location.href = '../Carrito.html';
+}
+</script>
+<script>
+function agregarAlCarrito(nombre, precio, imagen) {
+  const rutaImagen = "Ext.cubos/" + imagen;
+
   let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   const existente = carrito.find(item => item.nombre === nombre);
 
   if (existente) {
     existente.cantidad += 1;
   } else {
-    carrito.push({ nombre, precio, imagen, cantidad: 1 });
+    carrito.push({ nombre, precio, imagen: rutaImagen, cantidad: 1 });
   }
 
   localStorage.setItem('carrito', JSON.stringify(carrito));
   alert(`${nombre} agregado al carrito por $${precio} MXN`);
-}
-
-function abrirCarrito() {
-  window.location.href = 'carrito.html';
 }
 </script>
 
@@ -540,3 +543,4 @@ inputBusqueda.addEventListener('input', () => {
 </body>
 
 </html>
+
