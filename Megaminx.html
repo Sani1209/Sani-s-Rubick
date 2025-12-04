@@ -431,7 +431,7 @@
     <div class="fila-tienda">
   <div class="titulo-tienda">Tienda</div>
   <a href="index.html">
-  <img src="imgCubo3x3/Flechita.jpeg" alt="Botón decorativo" class="imagen-nivel-tienda" onclick="accionBoton()">
+  <img src="Flechita.jpeg" alt="Botón decorativo" class="imagen-nivel-tienda" onclick="accionBoton()">
   </a>
 </div>
     <div class="zona-productos">
@@ -489,25 +489,22 @@
   <div class="texto-hover">Sanis Rubicks</div>
 </div>
 <script>
-function abrirCarrito() {
-  window.location.href = 'Carrito.html';
-}
-</script>
-<script>
-function agregarAlCarrito(nombre, precio, imagen) {
-  const rutaImagen = "Ext.cubos/" + imagen;
-
+  function agregarAlCarrito(nombre, precio, imagen) {
   let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   const existente = carrito.find(item => item.nombre === nombre);
 
   if (existente) {
     existente.cantidad += 1;
   } else {
-    carrito.push({ nombre, precio, imagen: rutaImagen, cantidad: 1 });
+    carrito.push({ nombre, precio, imagen, cantidad: 1 });
   }
 
   localStorage.setItem('carrito', JSON.stringify(carrito));
   alert(`${nombre} agregado al carrito por $${precio} MXN`);
+}
+
+function abrirCarrito() {
+  window.location.href = 'Carrito.html';
 }
 </script>
 <script>
@@ -552,3 +549,4 @@ function agregarAlCarrito(nombre, precio, imagen) {
 </body>
 
 </html>
+
